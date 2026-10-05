@@ -54,10 +54,10 @@
 
 > **什么时候用**：行情数据、回测、策略扫描
 
-| Skill | 层 | 用途 | 频率 |
-|:--|:--|:--|:--:|
-| 🔧 **cn-stock-data** | 自建 | **A股免费数据源 + 反爬 + 缓存**（待建） | — |
-| vision-skill | vault | 看图/OCR（读图表、截图、研报） | 🟡 |
+| Skill                | 层     | 用途                        | 频率  |
+| :------------------- | :---- | :------------------------ | :-: |
+| **cn-stock-data** | 自建 | **A股免费数据源 + 反爬 + 增量缓存**（[skills/cn-stock-data](skills/cn-stock-data)） | 🟢 |
+| vision-skill         | vault | 看图/OCR（读图表、截图、研报）         | 🟡  |
 
 > ⚠️ 量化的核心逻辑（十二策略、OAMV 切换）**不在 skill 里**，在 `.claude/fxl_research/` 的私有脚本中。
 
@@ -100,6 +100,16 @@
 | **skill-creator** | 用户 | **创建/改进 skill，并测量效果** | 🟢 |
 | 🔧 **agent-orchestrator** | 自建 | **多 agent 编排（Leader 制）**（待建） | — |
 
+### 自定义命令（`.claude/commands/`）
+
+| 命令 | 用途 | 频率 |
+|:--|:--|:--:|
+| **`/圆桌会议 <议题>`** | **召集 5 视角 + 知识库之灵对抗式评审，收敛出可落盘结论（允许留分歧）** | 🟢 |
+
+> 📌 出处：2026-09-05「老张3.3 六大升级建议」先例，2026-09-30 成文。
+> ⚠️ 是 🔧 `agent-orchestrator` 的**轻量版**——单 agent 分饰多角，不起并发子 agent。
+> 需要真正并发（多 agent 各自独立检索、互不可见）时，才升级到 `agent-orchestrator`。
+
 ---
 
 ## 七、⚙️ 其他
@@ -123,8 +133,9 @@
 | 处理数据表 | `xlsx` |
 | 做答辩 PPT | `pptx` / `office-academic-skill` |
 | 看图表/截图内容 | `vision-skill` |
-| 抓 A股行情 | 🔧 `cn-stock-data`（待建） |
+| 抓 A股行情 | `cn-stock-data`（`skills/cn-stock-data`：日线/清单/财务/行业 + 反爬缓存） |
 | 造一个新 skill | `skill-creator` |
+| **对一件事做多视角评审** | **`/圆桌会议 <议题>`** |
 | 拆多 agent 干活 | 🔧 `agent-orchestrator`（待建） |
 | 做海报/封面 | `canvas-design` |
 | 写代码/建服务 | `mcp-builder` / `claude-api` |
